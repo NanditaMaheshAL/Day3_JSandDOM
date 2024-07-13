@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections with JS and DOM</title>
+    <style>
+        #itemList {
+            margin-top: 20px;
+        }
+
+        .item {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Manage Your Items</h1>
+    <input type="text" id="itemInput" placeholder="Enter item">
+    <button onclick="addItem()">Add Item</button>
+    <button onclick="removeItem()">Remove Last Item</button>
+
+    <div id="itemList">
+        <h2>Items:</h2>
+    </div>
+
+    <script>
+        let items = [];
+        function addItem() {
+            const itemInput = document.getElementById('itemInput');
+            const newItem = itemInput.value;
+            if (newItem) {
+                items.push(newItem);
+                itemInput.value = '';
+                displayItems();
+            } else {
+                alert('Please enter an item');
+            }
+        }
+        function removeItem() {
+            if (items.length > 0) {
+                items.pop();
+                displayItems();
+            } else {
+                alert('No items to remove');
+            }
+        }
+        function displayItems() {
+            const itemList = document.getElementById('itemList');
+            itemList.innerHTML = '<h2>Items:</h2>';
+            items.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('item');
+                itemDiv.textContent = `${index + 1}. ${item}`;
+                itemList.appendChild(itemDiv);
+            });
+        }
+    </script>
+</body>
+
+</html>
